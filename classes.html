@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krishna Classes</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: linear-gradient(135deg, #e0f7fa, #ffffff); scroll-behavior: smooth; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(30, 144, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 10px; display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  header h1 { color: white; font-size: 28px; font-weight: 700; }
+  nav a {
+    color: white; margin: 0 15px; text-decoration: none; font-weight: 600;
+    position: relative; transition: 0.3s;
+  }
+  nav a::after {
+    content: ''; position: absolute; width: 0; height: 2px; background: #fff;
+    left: 0; bottom: -4px; transition: 0.3s;
+  }
+  nav a:hover::after { width: 100%; }
+
+  /* Banner */
+  .banner {
+    background: linear-gradient(135deg, #1e88e5, #42a5f5, #80d8ff);
+    color: white; padding: 60px 20px; text-align: center;
+    animation: bannerAnim 10s infinite alternate;
+    border-radius: 15px; margin: 20px auto; max-width: 1200px;
+  }
+  @keyframes bannerAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .banner h2 { font-size: 36px; margin-bottom: 20px; }
+  .banner p { font-size: 20px; max-width: 800px; margin: auto; }
+
+  /* Sections */
+  .section { padding: 60px 20px; text-align: center; }
+  .section h2 { font-size: 32px; margin-bottom: 20px; color: #01579b; }
+  .section p { font-size: 18px; color: #333; max-width: 700px; margin: auto; }
+
+  /* Courses */
+  .courses { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+  .course-card {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 25px; width: 250px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.5s, box-shadow 0.5s, opacity 1s ease-in-out;
+    opacity: 0;
+  }
+  .course-card.show { opacity: 1; transform: translateY(0); }
+  .course-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  }
+  .course-card h3 { color: #0277bd; margin-bottom: 10px; }
+  .course-card p { color: #333; font-size: 16px; margin-bottom: 5px; }
+
+  /* Enroll button */
+  .btn {
+    display: inline-block; padding: 15px 35px;
+    border-radius: 50px; background: #ff5722; color: #fff;
+    font-weight: 700; font-size: 18px; cursor: pointer; transition: 0.3s;
+    text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    animation: pulse 2s infinite;
+  }
+  .btn:hover { background: #e64a19; transform: scale(1.1); }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,87,34,0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(255,87,34,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,87,34,0); }
+  }
+
+  /* Contact Form */
+  form { max-width: 500px; margin: auto; display: flex; flex-direction: column; }
+  form input, form textarea {
+    padding: 12px; margin: 10px 0; border-radius: 10px;
+    border: 1px solid #ccc; font-size: 16px;
+  }
+  form button {
+    margin-top: 10px; border: none; padding: 12px;
+    border-radius: 50px; background: #1e88e5; color: #fff;
+    font-weight: 600; cursor: pointer; transition: 0.3s;
+  }
+  form button:hover { background: #1565c0; transform: scale(1.05); }
+
+  /* Timetable */
+  .timetable { max-width: 900px; margin: auto; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  th, td { padding: 12px; border: 1px solid #ccc; text-align: center; }
+  th { background: #0277bd; color: white; }
+
+  /* Testimonials */
+  .testimonials { max-width: 800px; margin: 50px auto 0; overflow: hidden; position: relative; }
+  .testimonial-container { display: flex; transition: transform 0.5s ease-in-out; }
+  .testimonial { flex: 0 0 100%; background: rgba(255,255,255,0.35); backdrop-filter: blur(12px); border-radius: 20px; padding: 30px; margin: 0 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+  .testimonial p { font-size: 18px; margin-bottom: 10px; }
+  .testimonial span { font-weight: bold; color: #01579b; }
+
+  /* Modal */
+  .modal {
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); justify-content: center; align-items: center;
+  }
+  .modal-content {
+    background: #fff; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: relative;
+  }
+  .close {
+    position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: #333;
+  }
+
+  /* Footer */
+  footer { text-align: center; padding: 30px; background: #0277bd; color: white; }
+
+  /* Responsive */
+  @media(max-width:768px){ .courses { flex-direction: column; align-items: center; } table { font-size: 14px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Krishna Classes</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="banner" id="home">
+  <h2>Welcome to Krishna Classes</h2>
+  <p>Learn English, Science, Maths, Social Science & Spoken English. Std 5–10 children & students, and Spoken English for all ages including working professionals & home-makers.</p>
+  <a class="btn" id="enrollBtn">Enroll Now</a>
+</section>
+
+<section id="courses" class="section">
+  <h2>Our Courses</h2>
+  <div class="courses">
+    <div class="course-card"><h3>English</h3><p>Std 5-10 | Children & Students</p></div>
+    <div class="course-card"><h3>Science</h3><p>Std 5-10 | Children & Students</p></div>
+    <div class="course-card"><h3>Maths</h3><p>Std 5-10 | Children & Students</p></div>
+    <div class="course-card"><h3>Social Science</h3><p>Std 5-10 | Children & Students</p></div>
+    <div class="course-card"><h3>Spoken English</h3><p>All Ages | Including Working Professionals & Home-Makers</p></div>
+  </div>
+</section>
+
+<section id="timetable" class="section">
+  <h2>Weekly Timetable</h2>
+  <div class="timetable">
+    <table>
+      <tr><th>Day</th><th>9-11 AM</th><th>11-1 PM</th><th>2-4 PM</th></tr>
+      <tr><td>Monday</td><td>English</td><td>Maths</td><td>Science</td></tr>
+      <tr><td>Tuesday</td><td>Social Science</td><td>Spoken English</td><td>Maths</td></tr>
+      <tr><td>Wednesday</td><td>Science</td><td>English</td><td>Social Science</td></tr>
+      <tr><td>Thursday</td><td>Maths</td><td>Spoken English</td><td>Science</td></tr>
+      <tr><td>Friday</td><td>English</td><td>Maths</td><td>Social Science</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="testimonials" class="section">
+  <h2>Testimonials</h2>
+  <div class="testimonials">
+    <div class="testimonial-container" id="testimonialContainer">
+      <div class="testimonial"><p>"Krishna Classes helped me excel in all subjects. Spoken English classes boosted my confidence!"</p><span>- Student A</span></div>
+      <div class="testimonial"><p>"Tutor Aniruddh Surti explains concepts very clearly. Classes are interactive and engaging."</p><span>- Student B</span></div>
+      <div class="testimonial"><p>"Perfect for working professionals and home-makers. Highly recommend Krishna Classes!"</p><span>- Student C</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Enroll Modal -->
+<div id="enrollModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Enroll Now</h2>
+    <form id="modalForm">
+      <input type="text" id="modalName" placeholder="Your Name" required>
+      <input type="email" id="modalEmail" placeholder="Your Email" required>
+      <input type="tel" id="modalPhone" placeholder="Your Phone Number" required>
+      <textarea id="modalMessage" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<footer>&copy; 2025 Krishna Classes. All Rights Reserved.</footer>
+
+<script>
+// Modal functionality
+const modal = document.getElementById("enrollModal");
+const btn = document.getElementById("enrollBtn");
+const span = document.querySelector(".close");
+btn.onclick = () => { modal.style.display = "flex"; }
+span.onclick = () => { modal.style.display = "none"; }
+window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
+
+// Animate course cards on scroll
+const cards = document.querySelectorAll('.course-card');
+window.addEventListener('scroll', () => {
+  const triggerBottom = window.innerHeight / 5 * 4;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < triggerBottom) card.classList.add('show');
+  });
+});
+
+// Testimonials slider
+let testimonialIndex = 0;
+const container = document.getElementById('testimonialContainer');
+setInterval(() => {
+  testimonialIndex = (testimonialIndex + 1) % container.children.length;
+  container.style.transform = `translateX(-${testimonialIndex * 100}%)`;
+}, 4000);
+
+// Modal form submit: save to TXT
+document.getElementById('modalForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const name = document.getElementById('modalName').value.trim();
+  const email = document.getElementById('modalEmail').value.trim();
+  const phone = document.getElementById('modalPhone').value.trim();
+  const message = document.getElementById('modalMessage').value.trim();
+
+  const data = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}\n\n`;
+
+  // Create a downloadable TXT file
+  const blob = new Blob([data], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'enrollment.txt';
+  link.click();
+
+  alert("Your enrollment data has been saved locally! You can send this file to Krishna Classes.");
+  modal.style.display = 'none';
+  this.reset();
+});
+</script>
+
+</body>
+</html>

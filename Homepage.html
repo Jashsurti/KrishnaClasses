@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LearnOnline | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { 
+      background: linear-gradient(120deg, #0f172a, #1e293b, #0f172a);
+      background-size: 600% 600%;
+      animation: gradientShift 20s ease infinite;
+      color: #e5e7eb; 
+      overflow-x:hidden; 
+    }
+
+    @keyframes gradientShift {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Navbar */
+    nav { position: fixed; top:0; width:100%; background: rgba(0,0,0,0.7); display:flex; justify-content:center; gap:35px; padding:15px; z-index:1000; backdrop-filter: blur(10px); }
+    nav a { color:#e5e7eb; text-decoration:none; font-weight:500; position:relative; }
+    nav a::after { content:''; position:absolute; width:0; height:2px; background: linear-gradient(90deg,#3b82f6,#8b5cf6); left:0; bottom:-6px; transition:.3s; }
+    nav a:hover::after { width:100%; }
+
+    /* Hero */
+    header { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:20px; position:relative; }
+    header h1 { font-size:4rem; color:#3b82f6; }
+    header p { font-size:1.3rem; max-width:650px; margin-top:15px; opacity:0.9; }
+    .hero-btn { margin-top:35px; padding:15px 40px; border:none; border-radius:40px; background: linear-gradient(135deg,#0ea5e9,#8b5cf6); color:#fff; font-size:1.05rem; cursor:pointer; box-shadow:0 0 20px rgba(14,165,233,0.5); transition:.4s; }
+    .hero-btn:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 0 35px rgba(139,92,246,0.8); }
+
+    /* Floating shapes */
+    .shape { position:absolute; width:120px; height:120px; background:linear-gradient(135deg,#0ea5e9,#8b5cf6); opacity:0.15; border-radius:50%; animation:float 8s infinite ease-in-out; }
+    .shape.one { top:15%; left:10%; }
+    .shape.two { bottom:20%; right:12%; animation-delay:3s; }
+    .shape.three { top:40%; right:25%; width:80px; height:80px; animation-delay:5s; }
+    @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-30px); } }
+
+    /* Features */
+    section { padding:90px 8%; }
+    h2 { color:#0ea5e9; font-size:2.6rem; margin-bottom:40px; text-align:center; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:35px; }
+    .feature { 
+      background: rgba(255,255,255,0.05); 
+      backdrop-filter: blur(10px); 
+      padding:35px 25px; 
+      border-radius:25px; 
+      text-align:center; 
+      box-shadow:0 20px 50px rgba(0,0,0,0.7); 
+      transition:.4s; 
+      position:relative; 
+      overflow:hidden; 
+    }
+    .feature::before { content:''; position:absolute; inset:0; background: linear-gradient(120deg, transparent, rgba(14,165,233,0.3), transparent); opacity:0; transition:.4s; }
+    .feature:hover::before { opacity:1; }
+    .feature:hover { transform:translateY(-12px) scale(1.03); }
+    .feature h3 { color:#3b82f6; margin-bottom:10px; }
+
+    footer { background:#0f172a; text-align:center; padding:25px; color:#94a3b8; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a href="courses.html">Courses</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<header>
+  <div class="shape one"></div>
+  <div class="shape two"></div>
+  <div class="shape three"></div>
+  <h1 id="title">LearnOnline</h1>
+  <p>Experience next‑generation online learning with interactive courses and expert instructors.</p>
+  <button class="hero-btn" onclick="changeText()">Start Learning</button>
+</header>
+
+<section>
+  <h2>Why Learn With Us?</h2>
+  <div class="features">
+    <div class="feature"><h3>Expert Instructors</h3><p>Industry professionals and experienced educators.</p></div>
+    <div class="feature"><h3>Flexible Learning</h3><p>Learn anytime, anywhere at your own pace.</p></div>
+    <div class="feature"><h3>Career Growth</h3><p>Skill‑based courses designed for real jobs.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 LearnOnline | Home Page</p>
+</footer>
+
+<script>
+  function changeText() {
+    document.getElementById('title').innerText = 'Your Future Starts Here 🚀';
+  }
+</script>
+
+</body>
+</html>
